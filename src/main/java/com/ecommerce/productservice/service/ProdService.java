@@ -1,9 +1,12 @@
 package com.ecommerce.productservice.service;
 
+import com.ecommerce.productservice.dao.BatchRepo;
 import com.ecommerce.productservice.dao.InstructorRepo;
 import com.ecommerce.productservice.dao.ProductRepository;
+import com.ecommerce.productservice.dto.BatchDTO;
 import com.ecommerce.productservice.dto.CreateInstructorDTO;
 import com.ecommerce.productservice.dto.ProductsDto;
+import com.ecommerce.productservice.models.Batch;
 import com.ecommerce.productservice.models.Instructor;
 import com.ecommerce.productservice.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ public class ProdService {
     ProductRepository productRepo;
     @Autowired
     InstructorRepo iRepo;
+    @Autowired
+    BatchRepo bRepo;
 
     public void createProducts(ProductsDto product){
 
@@ -96,5 +101,28 @@ public class ProdService {
         iRepo.save(i);
     }
 
+    public List<BatchDTO> getBatchesInfo(String instructorname){
 
+        List<Batch> batches=bRepo.findByInstructorName(instructorname);
+
+        List<BatchDTO> ans = new ArrayList<>();
+
+        for (Batch batch : batches) {
+
+            ans.add(convertBatchtoDto(batch));
+        }
+
+        return ans;
+    }
+
+    private BatchDTO convertBatchtoDto(Batch byInstructorName) {
+
+
+        BatchDTO bdto = new BatchDTO();
+
+        bdto.setName(byInstructorName.getName());
+
+        return bdto;
+
+    }
 }

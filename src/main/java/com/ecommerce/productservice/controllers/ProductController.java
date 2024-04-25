@@ -1,9 +1,10 @@
 package com.ecommerce.productservice.controllers;
 
+import com.ecommerce.productservice.dto.BatchDTO;
 import com.ecommerce.productservice.dto.CreateBatchDTO;
 import com.ecommerce.productservice.dto.CreateInstructorDTO;
 import com.ecommerce.productservice.dto.ProductsDto;
-import com.ecommerce.productservice.models.Product;
+import com.ecommerce.productservice.models.Batch;
 import com.ecommerce.productservice.service.ProdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,12 @@ public class ProductController {
     public @ResponseBody String createbatch(@RequestBody CreateBatchDTO cbdto) {
 
         return null;
+    }
+
+    @GetMapping("/batchinfo/{name}")
+    public @ResponseBody List<BatchDTO> getbatchesinfo(@PathVariable String name){
+
+        return pService.getBatchesInfo(name);
     }
 
 
