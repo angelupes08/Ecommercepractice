@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
+//Add getters and setters
 @Getter
 @Setter
 public class InstructorDTO {
